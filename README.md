@@ -8,7 +8,7 @@ This fig.yml assumes a local host filesystem of /docker-registry is ready to be 
 
 This has a sqlite enabled sqlalchemy search index, as well as a redis LRU cache for smaller files to avoid hitting disk when possible.
 
-You will need to point your slave docker daemons at this docker host as a registry-mirror on port 5000 to use this cache:
+You will need to point your slave docker daemons at this docker host as a registry-mirror on port 5555 to use this cache:
 
-    docker -d --registry-mirror http://{ip}:5000 --insecure-registry 10.0.0.0/8 --insecure-registry 172.16.0.0/12 --insecure-registry 192.168.0.0/16
+    docker -d --registry-mirror http://{ip}:5555 --insecure-registry 10.0.0.0/8 --insecure-registry 172.16.0.0/12 --insecure-registry 192.168.0.0/16
 
