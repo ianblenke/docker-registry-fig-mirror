@@ -1,0 +1,24 @@
+redis:
+  image: redis
+  ports:
+    - "6379:6379"
+
+registry:
+  build: .
+  links:
+    - redis:redis
+  volumes:
+    - /docker-registry:/data
+  environment:
+    LOGLEVEL: debug
+    DEBUG: true
+    SETTINGS_FLAVOR: local
+    STORAGE_PATH: /data/registry
+    SEARCH_BACKEND: sqlalchemy
+    SQLALCHEMY_INDEX_DATABASE: sqlite:////data/docker-registry.db
+    STANDALONE: false
+    MIRROR_SOURCE:  https://registry-1.docker.io
+    MIRROR_SOURCE_INDEX: https://index.docker.io
+    MIRROR_TAGS_CACHE_TTL: 172800 # seconds
+  ports:
+    - "5000:5000"
